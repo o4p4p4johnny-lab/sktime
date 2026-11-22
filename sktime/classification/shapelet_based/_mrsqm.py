@@ -45,6 +45,20 @@ class MrSQM(_DelegatedClassifier):
     .. [2] Thach Le Nguyen and Georgiana Ifrim.
        "Fast Time Series Classification with Random Symbolic Subsequences".
        AALTD 2022.
+
+    Examples
+    --------
+    Fit a classifier and predict labels for new time series
+    (requires ``mrsqm`` and ``numba``).
+
+    >>> from sktime.classification.shapelet_based import MrSQM
+    >>> from sktime.datasets import load_unit_test
+    >>> X_train, y_train = load_unit_test(split="train")
+    >>> X_test, y_test = load_unit_test(split="test")
+    >>> model = MrSQM(random_state=42)  # doctest: +SKIP
+    >>> _ = model.fit(X_train, y_train)  # doctest: +SKIP
+    >>> y_pred = model.predict(X_test)  # doctest: +SKIP
+    >>> y_pred.shape # doctest: +SKIP
     """
 
     _tags = {
@@ -61,7 +75,6 @@ class MrSQM(_DelegatedClassifier):
         # testing configuration
         # ---------------------
         "tests:vm": True,
-        "tests:skip_by_name": ["test_class_has_doctest_example"],
     }
 
     def __init__(
